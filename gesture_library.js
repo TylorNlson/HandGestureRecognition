@@ -4,7 +4,7 @@ class GestureLibrary {
       this.handEmojisMap = new Map([
         ['Waving Hand', '👋'],
         ['Open Hand', '✋'],
-        ['OK Hand', '👌'],
+        ['Ok Hand', '👌'],
         ['Peace', '✌️'],
         ['Crossed Fingers', '🤞'],
         ['Love-You Gesture', '🤟'],
