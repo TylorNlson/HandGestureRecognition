@@ -15,12 +15,12 @@ h1 {
 
 #logo {
     position: absolute; /* Position the logo */
-    top: 20px; /* Adjust as needed */
-    left: 20px; /* Adjust as needed */
-    width: 100px; /* Adjust width */
+    top: 5px; /* Move closer to the top */
+    left: 5px; /* Move closer to the left */
+    width: 120px; /* Increase width */
     height: auto; /* Maintain aspect ratio */
     z-index: 100; /* Ensure it's above other elements */
-}
+} 
 
 #video {
     max-width: 100%;
