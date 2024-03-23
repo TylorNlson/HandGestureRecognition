@@ -78,7 +78,7 @@ class CameraCapture {
 
                 // Love Sign
                 if (indexExtended && middleExtended && !ringExtended && !pinkyExtended) {
-                    return "Love";
+                    return "Peace";
                 }
                 
             }
