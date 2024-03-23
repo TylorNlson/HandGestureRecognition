@@ -34,31 +34,7 @@ class CameraCapture {
         }, 100); // Run detection every 100 milliseconds
     }
 
-    // interpretGesture(landmarks) {
-    //     // Example gesture interpretation logic, needs to be expanded
-    //     const palmBase = landmarks[0];
-    //     const thumbTip = landmarks[4];
-    //     const indexFingerTip = landmarks[8];
-    //     const pinkyTip = landmarks[20];
 
-    //     // Euclidean distance between two points
-    //     const distance = (point1, point2) => {
-    //         return Math.sqrt(Math.pow(point1[0] - point2[0], 2) + Math.pow(point1[1] - point2[1], 2) + Math.pow(point1[2] - point2[2], 2));
-    //     };
-
-    //     // Average distance of index and pinky tips from the palm base
-    //     const averageDistance = (distance(palmBase, indexFingerTip) + distance(palmBase, pinkyTip)) / 2;
-
-    //     // Detecting gestures based on the distances
-    //     if (averageDistance > 100) { // Threshold value, adjust based on your testing
-    //         return "Open Hand";
-    //     } else if (distance(palmBase, thumbTip) > 100 && averageDistance < 100) { // Thumbs-up, adjust threshold as needed
-    //         return "Thumbs-Up";
-    //     } else {
-    //         return "Closed Fist";
-    //     }
-    //     // Expand with additional gesture checks as needed
-    // }
 
     interpretGesture(landmarks) {
         const distance = (point1, point2) => {
