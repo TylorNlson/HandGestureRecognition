@@ -70,67 +70,63 @@
 
 
 
-    interpretGesture(landmarks,handIndex) {
+    interpretGesture(landmarks, handIndex) {
         const distance = (point1, point2) => {
             return Math.sqrt(Math.pow(point1[0] - point2[0], 2) + Math.pow(point1[1] - point2[1], 2) + Math.pow(point1[2] - point2[2], 2));
         };
     
-        // Helper function to determine if a finger is extended
-        const isFingerExtended = (tipIndex, mcpIndex) => distance(landmarks[tipIndex], landmarks[mcpIndex]) > 50; // Example threshold
+        // Determines if a finger is extended based on the distance between fingertips and the MCP joint
+        const isFingerExtended = (tipIndex, mcpIndex) => distance(landmarks[tipIndex], landmarks[mcpIndex]) > 60; // Adjust threshold based on observation
     
-        // Checking thumb orientation for "Thumbs Up" vs. "Thumbs Down"
-        const thumbIsUp = landmarks[4][1] < landmarks[2][1]; // If thumb tip is higher (y is lower) than its MCP joint
+        // Use the y-coordinate to determine if the thumb is higher than the MCP joint for thumb orientation
+        const thumbIsUp = landmarks[4][1] < landmarks[0][1]; 
     
-        // Check for specific gestures
+        // Calculate distances for gesture recognition
         const thumbIndexDistance = distance(landmarks[4], landmarks[8]);
-        const thumbExtended = isFingerExtended(4, 0); // Checking if the thumb is extended
+        
+        // Determine if each finger is extended
+        const thumbExtended = isFingerExtended(4, 1);
         const indexExtended = isFingerExtended(8, 5);
         const middleExtended = isFingerExtended(12, 9);
         const ringExtended = isFingerExtended(16, 13);
         const pinkyExtended = isFingerExtended(20, 17);
         
         const allFingersFolded = !thumbExtended && !indexExtended && !middleExtended && !ringExtended && !pinkyExtended;
-
-        // OK Gesture
-        if (thumbIndexDistance < 30 && middleExtended && ringExtended && pinkyExtended) { // Adjust distance threshold as needed
+    
+        // OK Gesture - Thumb and index touch while other fingers extended
+        if (thumbIndexDistance < 50 && middleExtended && ringExtended && pinkyExtended) {
             return "OK";
         }
-        // Call Me Gesture
-        else if (thumbExtended && pinkyExtended && !middleExtended && !ringExtended) {
+        // Call Me Gesture - Thumb and pinky extended, others folded
+        else if (thumbExtended && pinkyExtended && !middleExtended && !ringExtended && !indexExtended) {
             return "Call Me";
         }
-        // Pointing Gesture
-        else if (indexExtended && !middleExtended && !ringExtended && !pinkyExtended) {
+        // Pointing Gesture - Only index extended
+        else if (indexExtended && !middleExtended && !ringExtended && !pinkyExtended && !thumbExtended) {
             return "Pointing";
         }
-
-        if (thumbExtended && indexExtended && middleExtended && ringExtended && pinkyExtended) {
-            return "Open Hand";
-        } else if (allFingersFolded) {
-            // Separate section for Closed Fist as requested
-            return "Closed Fist";
-        } else if (indexExtended && !middleExtended && !ringExtended && pinkyExtended) {
+        // Hook 'Em - Index and pinky extended, others folded
+        else if (indexExtended && !middleExtended && !ringExtended && pinkyExtended && thumbExtended) {
             return "Hook 'Em";
-        }else {
-            // Adjusted to include "Love", "Hook 'Em", and other specific gestures with distinct conditions
-            if (thumbExtended) { 
-        // Thumbs Up or Thumbs Down
-                if (thumbIsUp && !indexExtended && !middleExtended && !ringExtended && !pinkyExtended) {
-                    return "Thumbs Up";
-                } else if (!thumbIsUp && !indexExtended && !middleExtended && !ringExtended && !pinkyExtended) {
-                    return "Thumbs Down";
-                }
-
-                // Love Sign
-                if (indexExtended && middleExtended && !ringExtended && !pinkyExtended) {
-                    return "Peace";
-                }
-                
-            }
-       
-        // Default to Closed Fist if no other gesture matches
-        return "Recognizing gesture...";
         }
+        // Peace or Love Gesture - Index and middle extended, others folded, with thumb orientation considered for Love
+        else if (indexExtended && middleExtended && !ringExtended && !pinkyExtended) {
+            return thumbExtended ? "Love" : "Peace";
+        }
+        // Thumbs Up or Thumbs Down - Based on thumb orientation
+        else if (thumbExtended && !indexExtended && !middleExtended && !ringExtended && !pinkyExtended) {
+            return thumbIsUp ? "Thumbs Up" : "Thumbs Down";
+        }
+        // Open Hand - All fingers extended
+        else if (thumbExtended && indexExtended && middleExtended && ringExtended && pinkyExtended) {
+            return "Open Hand";
+        }
+        // Closed Fist - All fingers folded
+        else if (allFingersFolded) {
+            return "Closed Fist";
+        }
+        // Default to recognizing gesture if no other matches
+        return "Recognizing gesture...";
     }
 
     updateLatestHandSign(handSign) {
