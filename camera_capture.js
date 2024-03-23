@@ -7,7 +7,7 @@ class CameraCapture {
         ['Peace', '✌️'],
         ['Crossed Fingers', '🤞'],
         ['Love-You Gesture', '🤟'],
-        ['Sign of the Horns', '🤘'],
+        ['Hook Em', '🤘'],
         ['Call Me', '🤙'],
         ['Backhand Index Pointing Left', '👈'],
         ['Pointing', '👉'],
@@ -107,7 +107,7 @@ class CameraCapture {
         }
         // Hook 'Em - Index and pinky extended, others folded
         else if (indexExtended && !middleExtended && !ringExtended && pinkyExtended && thumbExtended) {
-            return "Hook 'Em";
+            return "Hook Em";
         }
         // Peace or Love Gesture - Index and middle extended, others folded, with thumb orientation considered for Love
         else if (indexExtended && middleExtended && !ringExtended && !pinkyExtended) {
