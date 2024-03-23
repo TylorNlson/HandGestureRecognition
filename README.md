@@ -1,1 +1,1 @@
-# github
+# Hand Gesture Project
