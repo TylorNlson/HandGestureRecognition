@@ -1,4 +1,4 @@
- class CameraCapture {   
+class CameraCapture {   
 
     handEmojisMap = new Map([
         ['Waving Hand', '👋'],
