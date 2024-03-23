@@ -114,7 +114,7 @@ class CameraCapture {
             return thumbExtended ? "Love" : "Peace";
         }
         // Thumbs Up or Thumbs Down - Based on thumb orientation
-        else if (thumbExtended && !indexExtended && !middleExtended && !ringExtended && !pinkyExtended) {
+        else if (thumbExtended && !indexExtended && !middleExtended && !ringExtended && !pinkyExtended || thumbExtended) {
             return thumbIsUp ? "Thumbs Up" : "Thumbs Down";
         }
         // Open Hand - All fingers extended
