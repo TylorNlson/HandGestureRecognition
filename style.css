@@ -60,38 +60,31 @@ h1 {
     position: fixed;
     bottom: 20px; /* Adjust the distance from the bottom */
     right: 20px; /* Adjust the distance from the right */
-    font-size: 24px; /* Adjust the size of the question mark */
+}
+
+#helpIcon img {
+    width: 100px; /* Adjust the width of the image */
+    height: auto; /* Maintain aspect ratio */
     cursor: pointer; /* Change the cursor to indicate it's interactive */
 }
 
 .tooltip {
-    visibility: hidden;
-    max-width: 300px;
-    background-color: #555;
+    display: none; 
+    right: -100px;
+    position: absolute;
+    bottom: calc(100% + 10px); /* Adjust as needed */
+    left: 30%; /* Adjust left position */
+    background-color: #333;
     color: #fff;
-    text-align: center;
-    border-radius: 6px;
-    padding: 5px 10px;
-    position: absolute;
-    z-index: 1;
-    bottom: 125%;
-    left: 100; /* Position the tooltip to the left edge of the icon */
-    transform: translateX(-100%); /* Move the tooltip to the left by its full width */
-    opacity: 0;
-    transition: opacity 0.3s;
-}
-
-.tooltip::after {
-    content: "";
-    position: absolute;
-    top: 100%;
-    left: calc(100% - 10px); /* Adjust as needed to align with the text */
-    border-width: 5px;
-    border-style: solid;
-    border-color: #555 transparent transparent transparent;
+    padding: 10px;
+    border-radius: 5px;
+    max-width: 300px; /* Adjust max-width as needed */
+    max-height: 200px; /* Limit the maximum height */
+    overflow-y: auto; /* Add vertical scrollbar if content exceeds max height */
+    text-align: center; 
+    transform: translateX(-50%);
 }
 
 #helpIcon:hover .tooltip {
-    visibility: visible;
-    opacity: 1;
+    display: block;
 }
