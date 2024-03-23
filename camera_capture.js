@@ -2,32 +2,43 @@ class CameraCapture {
     constructor(videoElementId) {
         this.videoElement = document.getElementById(videoElementId);
     }
-
+  a
     async startStream() {
         try {
             const stream = await navigator.mediaDevices.getUserMedia({ video: true });
             this.videoElement.srcObject = stream;
+            this.loadHandposeModel();
         } catch (error) {
             console.error("Error accessing the webcam:", error);
         }
     }
-}
-
-// Main function to initialize the camera capture
-async function initializeCamera() {
+  
+    async loadHandposeModel() {
+        this.model = await handpose.load();
+        console.log('Handpose model loaded.');
+        this.detectHandSign();
+    }
+  
+    async detectHandSign() {
+        // Loop to continuously detect hand signs
+        setInterval(async () => {
+            const predictions = await this.model.estimateHands(this.videoElement);
+            if (predictions.length > 0) {
+                // Display the raw prediction data for the first detected hand
+                this.updateLatestHandSign(JSON.stringify(predictions[0], null, 2));
+            } else {
+                this.updateLatestHandSign('No hand detected');
+            }
+        }, 100); // Run detection every 100 milliseconds
+    }
+  
+    updateLatestHandSign(handSign) {
+        const latestHandSignElement = document.getElementById('latestHandSign');
+        latestHandSignElement.textContent = handSign; // Update with the latest hand sign or message
+    }
+  }
+  
+  document.addEventListener('DOMContentLoaded', async () => {
     const camera = new CameraCapture('video');
     await camera.startStream();
-}
-
-// Optional: Placeholder for future gesture detection functionality
-async function detectGestures() {
-    // Placeholder for future implementation
-    // This function would interact with a model to detect hand gestures in the camera feed.
-}
-
-document.addEventListener('DOMContentLoaded', () => {
-    // Start the camera as soon as the document is fully loaded
-    initializeCamera();
-    
-    // Additional logic for gesture recognition would be initiated here as well
-});
+  });
