@@ -1,4 +1,5 @@
 body {
+    position: relative; /* Necessary for positioning */
     display: flex;
     justify-content: center; /* Centers children horizontally */
     align-items: center; /* Centers children vertically */
@@ -6,10 +7,19 @@ body {
     margin: 0; /* Remove default margin */
     flex-direction: column; /* Stack children vertically */
     background-color: #383532; /* Sets the background to a light orange */
-} 
+}
 
 h1 {
     color: #FFFFFF; /* Sets the text color of all <h1> elements to white */
+}
+
+#logo {
+    position: absolute; /* Position the logo */
+    top: 20px; /* Adjust as needed */
+    left: 20px; /* Adjust as needed */
+    width: 100px; /* Adjust width */
+    height: auto; /* Maintain aspect ratio */
+    z-index: 100; /* Ensure it's above other elements */
 }
 
 #video {
@@ -44,8 +54,44 @@ h1 {
     font-size: 20px; /* Increases the text size for better visibility */
     position: relative; /* Required for z-index to take effect */
     z-index: 10; /* Ensures the element is on top of other elements */
+}  
+
+#helpIcon {
+    position: fixed;
+    bottom: 20px; /* Adjust the distance from the bottom */
+    right: 20px; /* Adjust the distance from the right */
+    font-size: 24px; /* Adjust the size of the question mark */
+    cursor: pointer; /* Change the cursor to indicate it's interactive */
 }
 
+.tooltip {
+    visibility: hidden;
+    max-width: 300px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 10px;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 100; /* Position the tooltip to the left edge of the icon */
+    transform: translateX(-100%); /* Move the tooltip to the left by its full width */
+    opacity: 0;
+    transition: opacity 0.3s;
+}
 
+.tooltip::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: calc(100% - 10px); /* Adjust as needed to align with the text */
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+}
 
-
+#helpIcon:hover .tooltip {
+    visibility: visible;
+    opacity: 1;
+}

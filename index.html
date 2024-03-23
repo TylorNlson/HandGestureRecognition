@@ -9,12 +9,19 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <img src="formula_hacks_image.png" id="logo">
     <div id="checkerboardBanner"></div> <!-- Checkerboard banner -->
     <h1>Hand Gesture Recognition</h1>
     <video id="video" width="640" height="480" autoplay></video>
     <div id="chatSection">
         <div id="latestHandSign" style="border: 1px solid #ccc; padding: 10px;">
             Latest hand sign will be displayed here
+        </div>
+    </div>
+    <div id="helpIcon">
+        ?
+        <div class="tooltip">Make hand signs in front of the camera and the AI will try to recognize them to the best of its ability.
+            Please ensure the camera is enabled.
         </div>
     </div>
     <script src="camera_capture.js"></script>
