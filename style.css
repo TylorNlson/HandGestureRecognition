@@ -1,1 +1,28 @@
+body {
+    display: flex;
+    justify-content: center; /* Centers children horizontally */
+    align-items: center; /* Centers children vertically */
+    min-height: 100vh; /* Make body at least viewport height */
+    margin: 0; /* Remove default margin */
+    flex-direction: column; /* Stack children vertically */
+}
+
+#video {
+    /* Optional: Add some styles to ensure video is responsive and looks good */
+    max-width: 100%;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.2); /* Optional: Adds a slight shadow for better visibility */
+}
+
+#gestureOutput, #chatSection {
+    margin-top: 20px; /* Add some space above these sections for better spacing */
+}
+
+/* Style for the chat messages section */
+#messages {
+    height: 200px;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    width: 100%; /* Make it full-width to align with the parent container */
+    max-width: 640px; /* Optional: Limit the max width to match the video width */
+}
 
