@@ -19,7 +19,7 @@ class CameraCapture {
         ['Raised Fist', '✊'],
         ['Closed Fist', '👊'],
         ['Open Hand', '🤚'],
-        ['Pinching Hand', '🤏'],
+        ['Pinching', '🤏'],
         ['Clapping Hands', '👏'],
         ['Open Hands', '👐'],
         ['Raising Hands', '🙌'],
@@ -80,7 +80,7 @@ class CameraCapture {
     
         // Use the y-coordinate to determine if the thumb is higher than the MCP joint for thumb orientation
         const thumbIsUp = landmarks[4][1] < landmarks[0][1]; 
-    
+        const thumbIndexFingerDistance = distance(landmarks[4], landmarks[8]);
         // Calculate distances for gesture recognition
         const thumbIndexDistance = distance(landmarks[4], landmarks[8]);
         
@@ -124,7 +124,11 @@ class CameraCapture {
         // Closed Fist - All fingers folded
         else if (allFingersFolded) {
             return "Closed Fist";
+        } else if (thumbIndexFingerDistance < 30 && !middleExtended && !ringExtended && !pinkyExtended) {
+            return "Pinching";
         }
+
+        
         // Default to recognizing gesture if no other matches
         return "Recognizing gesture...";
     }
