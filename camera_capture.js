@@ -19,17 +19,21 @@ class CameraCapture {
         console.log('Handpose model loaded.');
         this.detectHandSign();
     }
-
+         //Update for two hands
     async detectHandSign() {
         // Loop to continuously detect hand signs
         setInterval(async () => {
             const predictions = await this.model.estimateHands(this.videoElement);
             if (predictions.length > 0) {
-                // Interpret the gesture based on the model's predictions
-                const gesture = this.interpretGesture(predictions[0].landmarks);
-                this.updateLatestHandSign(gesture); // Display interpreted gesture instead of raw data
+                // Interpret the gesture for each hand
+                predictions.forEach((prediction, index) => {
+                    const gesture = this.interpretGesture(prediction.landmarks, index);
+                    this.updateLatestHandSign(gesture, index); // Display interpreted gesture instead of raw data
+                });
             } else {
-                this.updateLatestHandSign('No hand detected');
+                // No hands detected, update with appropriate message
+                this.updateLatestHandSign('No hand detected', 0);
+                this.updateLatestHandSign('No hand detected', 1); // Update for second hand
             }
         }, 100); // Run detection every 100 milliseconds
     }
@@ -60,7 +64,7 @@ class CameraCapture {
     //     // Expand with additional gesture checks as needed
     // }
 
-    interpretGesture(landmarks) {
+    interpretGesture(landmarks,handIndex) {
         const distance = (point1, point2) => {
             return Math.sqrt(Math.pow(point1[0] - point2[0], 2) + Math.pow(point1[1] - point2[1], 2) + Math.pow(point1[2] - point2[2], 2));
         };
