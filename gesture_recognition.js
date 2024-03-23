@@ -68,6 +68,7 @@ class GestureRecognition {
         // Auto-scroll to the bottom of the chat section
         messagesDiv.scrollTop = messagesDiv.scrollHeight;
     }
+    
 }
 
 // Assuming your video element and TensorFlow.js scripts are correctly initialized and loaded
