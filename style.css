@@ -5,13 +5,18 @@ body {
     min-height: 100vh; /* Make body at least viewport height */
     margin: 0; /* Remove default margin */
     flex-direction: column; /* Stack children vertically */
-    background-color: #edc195; /* Sets the background to a light orange */
+    background-color: #383532; /* Sets the background to a light orange */
+} 
+
+h1 {
+    color: #FFFFFF; /* Sets the text color of all <h1> elements to white */
 }
 
 #video {
     max-width: 100%;
     box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
     transform: scaleX(-1); /* Flips the video horizontally */
+    border-radius: 15px; /* Rounds the corners of the video */
 }
 
 #chatSection {
@@ -19,19 +24,28 @@ body {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    width: 100%;
+    width: 100%; 
     max-width: 640px; /* Consistent with video width */
     margin-top: 5px; /* Reduced space to move the box up */
 }
 
 #latestHandSign {
     margin-top: 20px;
-    border: 1px solid #ccc;
+    border: 5px solid #000000; /* Sets a 5px solid black border */
     padding: 10px;
     width: 80%; /* Adjust width to be less than full width of its container */
     max-width: 500px; /* Reduced max width for a narrower box */
     text-align: center;
-    background-color: #707070; /* Slightly dark gray background */
+    background-color: #5fc9f8; /* Changed background color from dark gray to light blue */
     min-height: 50px; /* Sets a minimum height for the box */
+    border-radius: 15px; /* Rounds the corners of the box */
+    font-weight: bold; /* Makes the text bolder */
+    color: #FFFFFF; /* Sets the text color to white for more pop */
+    font-size: 20px; /* Increases the text size for better visibility */
+    position: relative; /* Required for z-index to take effect */
+    z-index: 10; /* Ensures the element is on top of other elements */
 }
+
+
+
 
