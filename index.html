@@ -1,22 +1,20 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Camera Capture Demo</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hand Gesture Recognition</title>
+    <!-- Link to your external CSS for styling -->
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-<video id="video" width="640" height="480" autoplay></video>
-<script src="cameraCapture.js"></script> <!-- Assuming your JS code is in this file -->
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        const camera = new CameraCapture('video');
-        camera.startStream().then(() => console.log("Webcam started."))
-                             .catch(err => console.error("Failed to start webcam: ", err));
-
-        // Optionally, to stop the stream, you could listen for a specific event, like a button click:
-        // document.getElementById('stopButton').addEventListener('click', () => camera.stopStream());
-    });
-</script>
-
+    <h1>Hand Gesture Recognition</h1>
+    <!-- Video element for displaying the webcam feed -->
+    <video id="video" width="640" height="480" autoplay></video>
+    <!-- Placeholder for gesture recognition results -->
+    <div id="gestureOutput">Gesture will be displayed here</div>
+    
+    <!-- Link to your JavaScript file -->
+    <script src="app.js"></script>
 </body>
 </html>
