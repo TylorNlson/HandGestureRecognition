@@ -19,11 +19,13 @@ body {
 }
 
 /* Style for the chat messages section */
-#messages {
-    height: 200px;
-    overflow-y: auto;
+/* Style for the latest hand sign display */
+#latestHandSign {
+    margin-top: 20px; /* Add some space above this section */
     border: 1px solid #ccc;
+    padding: 10px; /* Add some padding for text inside the box */
     width: 100%; /* Make it full-width to align with the parent container */
     max-width: 640px; /* Optional: Limit the max width to match the video width */
+    text-align: center; /* Center the text inside the box */
 }
 
