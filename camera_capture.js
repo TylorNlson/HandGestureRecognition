@@ -111,7 +111,7 @@ class CameraCapture {
         }
         // Peace or Love Gesture - Index and middle extended, others folded, with thumb orientation considered for Love
         else if (indexExtended && middleExtended && !ringExtended && !pinkyExtended) {
-            return thumbExtended ? "Love" : "Peace";
+            return "Peace";
         }
         // Thumbs Up or Thumbs Down - Based on thumb orientation
         else if (thumbExtended && !indexExtended && !middleExtended && !ringExtended && !pinkyExtended || thumbExtended && (!indexExtended && !middleExtended && !ringExtended && !pinkyExtended)) {
