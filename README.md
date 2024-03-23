@@ -10,3 +10,5 @@ Here's another link for live face recognition: https://www.youtube.com/watch?v=p
 Mediapipe for Gesture Recognition
 
 Tensorflow for predicting hand movement
+
+I also found a fully function Git Repository of the project: https://github.com/kinivi/hand-gesture-recognition-mediapipe
