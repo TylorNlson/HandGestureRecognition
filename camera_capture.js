@@ -57,7 +57,7 @@ class CameraCapture {
         const middleExtended = isFingerExtended(12, 9);
         const ringExtended = isFingerExtended(16, 13);
         const pinkyExtended = isFingerExtended(20, 17);
-    
+        
         const allFingersFolded = !thumbExtended && !indexExtended && !middleExtended && !ringExtended && !pinkyExtended;
         if (thumbExtended && indexExtended && middleExtended && ringExtended && pinkyExtended) {
             return "Open Hand";
@@ -80,8 +80,6 @@ class CameraCapture {
                 if (indexExtended && middleExtended && !ringExtended && !pinkyExtended) {
                     return "Love";
                 }
-
-                // Hook 'Em
                 
             }
        
