@@ -118,7 +118,7 @@ class CameraCapture {
             return thumbIsUp ? "Thumbs Up" : "Thumbs Down";
         }
         // Open Hand - All fingers extended
-        else if (thumbExtended && indexExtended && middleExtended && ringExtended && pinkyExtended) {
+        else if (!allFingersFolded) {
             return "Open Hand";
         }
         // Closed Fist - All fingers folded
