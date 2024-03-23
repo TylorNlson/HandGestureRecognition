@@ -10,7 +10,8 @@ body {
 #video {
     /* Optional: Add some styles to ensure video is responsive and looks good */
     max-width: 100%;
-    box-shadow: 0 0 8px rgba(0, 0, 0, 0.2); /* Optional: Adds a slight shadow for better visibility */
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.2); /* Optional: Adds a slight shadow for better visibility */ 
+    transform: scaleX(-1);
 }
 
 #gestureOutput, #chatSection {
