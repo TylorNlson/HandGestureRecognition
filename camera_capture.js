@@ -13,21 +13,7 @@ class CameraCapture {
     }
 }
 
-// Main function to initialize the camera capture
-async function initializeCamera() {
+document.addEventListener('DOMContentLoaded', async () => {
     const camera = new CameraCapture('video');
     await camera.startStream();
-}
-
-// Optional: Placeholder for future gesture detection functionality
-async function detectGestures() {
-    // Placeholder for future implementation
-    // This function would interact with a model to detect hand gestures in the camera feed.
-}
-
-document.addEventListener('DOMContentLoaded', () => {
-    // Start the camera as soon as the document is fully loaded
-    initializeCamera();
-    
-    // Additional logic for gesture recognition would be initiated here as well
 });

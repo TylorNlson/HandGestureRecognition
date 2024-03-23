@@ -6,17 +6,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hand Gesture Recognition</title>
-    <!-- Link to your external CSS for styling -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <h1>Hand Gesture Recognition</h1>
-    <!-- Video element for displaying the webcam feed -->
     <video id="video" width="640" height="480" autoplay></video>
-    <!-- Placeholder for gesture recognition results -->
     <div id="gestureOutput">Gesture will be displayed here</div>
-    
-    <!-- Link to your JavaScript file -->
+    <div id="chatSection">
+        <h2>Gesture Chat</h2>
+        <div id="messages" style="height: 200px; overflow-y: auto; border: 1px solid #ccc;"></div>
+    </div>
     <script src="camera_capture.js"></script>
+    <script src="gesture_recognition.js"></script>
 </body>
 </html>
