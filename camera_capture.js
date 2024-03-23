@@ -82,6 +82,7 @@
         const thumbIsUp = landmarks[4][1] < landmarks[2][1]; // If thumb tip is higher (y is lower) than its MCP joint
     
         // Check for specific gestures
+        const thumbIndexDistance = distance(landmarks[4], landmarks[8]);
         const thumbExtended = isFingerExtended(4, 0); // Checking if the thumb is extended
         const indexExtended = isFingerExtended(8, 5);
         const middleExtended = isFingerExtended(12, 9);
@@ -89,6 +90,20 @@
         const pinkyExtended = isFingerExtended(20, 17);
         
         const allFingersFolded = !thumbExtended && !indexExtended && !middleExtended && !ringExtended && !pinkyExtended;
+
+        // OK Gesture
+        if (thumbIndexDistance < 30 && middleExtended && ringExtended && pinkyExtended) { // Adjust distance threshold as needed
+            return "OK";
+        }
+        // Call Me Gesture
+        else if (thumbExtended && pinkyExtended && !middleExtended && !ringExtended) {
+            return "Call Me";
+        }
+        // Pointing Gesture
+        else if (indexExtended && !middleExtended && !ringExtended && !pinkyExtended) {
+            return "Pointing";
+        }
+
         if (thumbExtended && indexExtended && middleExtended && ringExtended && pinkyExtended) {
             return "Open Hand";
         } else if (allFingersFolded) {
