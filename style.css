@@ -5,27 +5,33 @@ body {
     min-height: 100vh; /* Make body at least viewport height */
     margin: 0; /* Remove default margin */
     flex-direction: column; /* Stack children vertically */
+    background-color: #edc195; /* Sets the background to a light orange */
 }
 
 #video {
-    /* Optional: Add some styles to ensure video is responsive and looks good */
     max-width: 100%;
-    box-shadow: 0 0 8px rgba(0, 0, 0, 0.2); /* Optional: Adds a slight shadow for better visibility */ 
-    transform: scaleX(-1);
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+    transform: scaleX(-1); /* Flips the video horizontally */
 }
 
-#gestureOutput, #chatSection {
-    margin-top: 20px; /* Add some space above these sections for better spacing */
+#chatSection {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    max-width: 640px; /* Consistent with video width */
+    margin-top: 5px; /* Reduced space to move the box up */
 }
 
-/* Style for the chat messages section */
-/* Style for the latest hand sign display */
 #latestHandSign {
-    margin-top: 20px; /* Add some space above this section */
+    margin-top: 20px;
     border: 1px solid #ccc;
-    padding: 10px; /* Add some padding for text inside the box */
-    width: 100%; /* Make it full-width to align with the parent container */
-    max-width: 640px; /* Optional: Limit the max width to match the video width */
-    text-align: center; /* Center the text inside the box */
+    padding: 10px;
+    width: 80%; /* Adjust width to be less than full width of its container */
+    max-width: 500px; /* Reduced max width for a narrower box */
+    text-align: center;
+    background-color: #707070; /* Slightly dark gray background */
+    min-height: 50px; /* Sets a minimum height for the box */
 }
 
