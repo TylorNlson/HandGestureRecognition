@@ -76,7 +76,7 @@ class CameraCapture {
         };
     
         // Determines if a finger is extended based on the distance between fingertips and the MCP joint
-        const isFingerExtended = (tipIndex, mcpIndex) => distance(landmarks[tipIndex], landmarks[mcpIndex]) > 60; // Adjust threshold based on observation
+        //const isFingerExtended = (tipIndex, mcpIndex) => distance(landmarks[tipIndex], landmarks[mcpIndex]) > 60; // Adjust threshold based on observation
 
         const handSize = distance(landmarks[0], landmarks[9]); // Use distance from wrist to middle knuckle as hand size reference
 
