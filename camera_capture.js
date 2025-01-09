@@ -88,7 +88,7 @@ class CameraCapture {
         const thumbIndexDistance = distance(landmarks[4], landmarks[8]);
         
         // Determine if each finger is extended
-        const thumbExtended = isFingerExtended(4, 1);
+        const thumbExtended = isFingerExtended(5, 1);
         const indexExtended = isFingerExtended(8, 5);
         const middleExtended = isFingerExtended(12, 9);
         const ringExtended = isFingerExtended(16, 13);
