@@ -1,32 +1,32 @@
 body {
-    position: relative; /* Necessary for positioning */
+    position: relative; 
     display: flex;
-    justify-content: center; /* Centers children horizontally */
-    align-items: center; /* Centers children vertically */
-    min-height: 100vh; /* Make body at least viewport height */
-    margin: 0; /* Remove default margin */
-    flex-direction: column; /* Stack children vertically */
-    background-color: #383532; /* Sets the background to a light orange */
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    flex-direction: column;
+    background-color: #383532;
 }
 
 h1 {
-    color: #FFFFFF; /* Sets the text color of all <h1> elements to white */
+    color: #FFFFFF;
 }
 
 #logo {
-    position: absolute; /* Position the logo */
-    top: 5px; /* Move closer to the top */
-    left: 5px; /* Move closer to the left */
-    width: 120px; /* Increase width */
-    height: auto; /* Maintain aspect ratio */
-    z-index: 100; /* Ensure it's above other elements */
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    width: 120px;
+    height: auto;
+    z-index: 100;
 } 
 
 #video {
     max-width: 100%;
     box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
-    transform: scaleX(-1); /* Flips the video horizontally */
-    border-radius: 15px; /* Rounds the corners of the video */
+    transform: scaleX(-1);
+    border-radius: 15px;
 }
 
 #chatSection {
@@ -35,52 +35,52 @@ h1 {
     align-items: center;
     flex-direction: column;
     width: 100%; 
-    max-width: 640px; /* Consistent with video width */
-    margin-top: 5px; /* Reduced space to move the box up */
+    max-width: 640px;
+    margin-top: 5px;
 }
 
 #latestHandSign {
     margin-top: 20px;
-    border: 5px solid #000000; /* Sets a 5px solid black border */
+    border: 5px solid #000000;
     padding: 10px;
-    width: 80%; /* Adjust width to be less than full width of its container */
-    max-width: 500px; /* Reduced max width for a narrower box */
+    width: 80%;
+    max-width: 500px;
     text-align: center;
-    background-color: #5fc9f8; /* Changed background color from dark gray to light blue */
-    min-height: 50px; /* Sets a minimum height for the box */
-    border-radius: 15px; /* Rounds the corners of the box */
-    font-weight: bold; /* Makes the text bolder */
-    color: #FFFFFF; /* Sets the text color to white for more pop */
-    font-size: 20px; /* Increases the text size for better visibility */
-    position: relative; /* Required for z-index to take effect */
-    z-index: 10; /* Ensures the element is on top of other elements */
+    background-color: #5fc9f8;
+    min-height: 50px;
+    border-radius: 15px;
+    font-weight: bold;
+    color: #FFFFFF;
+    font-size: 20px;
+    position: relative;
+    z-index: 10;
 }  
 
 #helpIcon {
     position: fixed;
-    bottom: 20px; /* Adjust the distance from the bottom */
-    right: 20px; /* Adjust the distance from the right */
+    bottom: 20px;
+    right: 20px;
 }
 
 #helpIcon img {
-    width: 100px; /* Adjust the width of the image */
-    height: auto; /* Maintain aspect ratio */
-    cursor: pointer; /* Change the cursor to indicate it's interactive */
+    width: 100px;
+    height: auto;
+    cursor: pointer;
 }
 
 .tooltip {
     display: none; 
     right: -100px;
     position: absolute;
-    bottom: calc(100% + 10px); /* Adjust as needed */
-    left: 30%; /* Adjust left position */
+    bottom: calc(100% + 10px);
+    left: 30%;
     background-color: #333;
     color: #fff;
     padding: 10px;
     border-radius: 5px;
-    max-width: 300px; /* Adjust max-width as needed */
-    max-height: 200px; /* Limit the maximum height */
-    overflow-y: auto; /* Add vertical scrollbar if content exceeds max height */
+    max-width: 300px;
+    max-height: 200px;
+    overflow-y: auto;
     text-align: center; 
     transform: translateX(-50%);
 }
@@ -88,7 +88,8 @@ h1 {
 #helpIcon:hover .tooltip {
     display: block;
 }
-/* Add media queries for different screen sizes */
+
+/* Enhanced media queries for different screen sizes */
 @media (max-width: 768px) {
     #video {
         width: 100%;
@@ -97,5 +98,19 @@ h1 {
     #latestHandSign {
         font-size: 1.2em;
     }
-    /* Adjust other styles as needed */
+}
+
+@media (max-width: 480px) {
+    #video {
+        width: 100%;
+        height: auto;
+    }
+    #latestHandSign {
+        font-size: 1em;
+        padding: 5px;
+        width: 90%;
+    }
+    #helpIcon img {
+        width: 80px;
+    }
 }
