@@ -88,3 +88,14 @@ h1 {
 #helpIcon:hover .tooltip {
     display: block;
 }
+/* Add media queries for different screen sizes */
+@media (max-width: 768px) {
+    #video {
+        width: 100%;
+        height: auto;
+    }
+    #latestHandSign {
+        font-size: 1.2em;
+    }
+    /* Adjust other styles as needed */
+}
