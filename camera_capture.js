@@ -76,12 +76,11 @@ class CameraCapture {
         };
     
         // Determines if a finger is extended based on the distance between fingertips and the MCP joint
-        //const isFingerExtended = (tipIndex, mcpIndex) => distance(landmarks[tipIndex], landmarks[mcpIndex]) > 60; // Adjust threshold based on observation
+        const isFingerExtended = (tipIndex, mcpIndex) => distance(landmarks[tipIndex], landmarks[mcpIndex]) > 60; // Adjust threshold based on observation
 
         const handSize = distance(landmarks[0], landmarks[9]); // Use distance from wrist to middle knuckle as hand size reference
 
-        const isFingerExtended = (tipIndex, mcpIndex) => distance(landmarks[tipIndex], landmarks[mcpIndex]) > handSize * 0.6;
-        
+       
         // Use the y-coordinate to determine if the thumb is higher than the MCP joint for thumb orientation
         const thumbIsUp = landmarks[4][1] < landmarks[0][1]; 
         const thumbIndexFingerDistance = distance(landmarks[4], landmarks[8]);
