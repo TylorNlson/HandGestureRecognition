@@ -34,15 +34,21 @@ class CameraCapture {
         this.model = null;
     }
 
-    async startStream() {
-        try {
-            const stream = await navigator.mediaDevices.getUserMedia({ video: true });
-            this.videoElement.srcObject = stream;
-            this.loadHandposeModel();
-        } catch (error) {
-            console.error("Error accessing the webcam:", error);
-        }
+async startStream() {
+    try {
+        const stream = await navigator.mediaDevices.getUserMedia({ 
+            video: {
+                facingMode: 'environment',
+                width: { ideal: 640 },
+                height: { ideal: 480 }
+            }
+        });
+        this.videoElement.srcObject = stream;
+        this.loadHandposeModel();
+    } catch (error) {
+        console.error("Error accessing the webcam:", error);
     }
+}
 
     async loadHandposeModel() {
         this.model = await handpose.load();
@@ -70,73 +76,49 @@ class CameraCapture {
 
 
 
-    interpretGesture(landmarks, handIndex) {
-        const distance = (point1, point2) => {
-            return Math.sqrt(Math.pow(point1[0] - point2[0], 2) + Math.pow(point1[1] - point2[1], 2) + Math.pow(point1[2] - point2[2], 2));
-        };
-    
-        // Determines if a finger is extended based on the distance between fingertips and the MCP joint
-        const isFingerExtended = (tipIndex, mcpIndex) => distance(landmarks[tipIndex], landmarks[mcpIndex]) > 60; // Adjust threshold based on observation
-    
-        // Use the y-coordinate to determine if the thumb is higher than the MCP joint for thumb orientation
-        const thumbIsUp = landmarks[4][1] < landmarks[0][1]; 
-        const thumbIndexFingerDistance = distance(landmarks[4], landmarks[8]);
-        // Calculate distances for gesture recognition
-        const thumbIndexDistance = distance(landmarks[4], landmarks[8]);
-        
-        // Determine if each finger is extended
-        const thumbExtended = isFingerExtended(4, 1);
-        const indexExtended = isFingerExtended(8, 5);
-        const middleExtended = isFingerExtended(12, 9);
-        const ringExtended = isFingerExtended(16, 13);
-        const pinkyExtended = isFingerExtended(20, 17);
-        
-        const allFingersFolded = !thumbExtended && !indexExtended && !middleExtended && !ringExtended && !pinkyExtended;
-    
-        // OK Gesture - Thumb and index touch while other fingers extended
-        if (thumbIndexDistance < 50 && middleExtended && ringExtended && pinkyExtended) {
-            return "OK";
-        }
-        // Call Me Gesture - Thumb and pinky extended, others folded
-        else if (thumbExtended && pinkyExtended && !middleExtended && !ringExtended && !indexExtended) {
-            return "Call Me";
-        }
-        // Pointing Gesture - Only index extended
-        else if (indexExtended && !middleExtended && !ringExtended && !pinkyExtended && !thumbExtended) {
-            return "Pointing";
-        }
-        // Hook 'Em - Index and pinky extended, others folded
-        else if (indexExtended && !middleExtended && !ringExtended && pinkyExtended && thumbExtended) {
-            return "Hook Em";
-        }
-        // Peace or Love Gesture - Index and middle extended, others folded, with thumb orientation considered for Love
-        else if (indexExtended && middleExtended && !ringExtended && !pinkyExtended) {
-            return "Peace";
-        }
-        // Thumbs Up or Thumbs Down - Based on thumb orientation
-        else if (thumbExtended && !indexExtended && !middleExtended && !ringExtended && !pinkyExtended || thumbExtended && (!indexExtended && !middleExtended && !ringExtended && !pinkyExtended)) {
-            return thumbIsUp ? "Thumbs Up" : "Thumbs Down";
-        }
-        // Open Hand - All fingers extended
-        else if (thumbExtended && indexExtended && middleExtended && ringExtended && pinkyExtended) {
-            return "Open Hand";
-        }
-        // Closed Fist - All fingers folded
-        else if (allFingersFolded) {
-            return "Closed Fist";
-        } else if (thumbIndexFingerDistance < 30 && !middleExtended && !ringExtended && !pinkyExtended) {
-            return "Pinching";
-        }
+interpretGesture(landmarks, handIndex) {
+    const distance = (point1, point2) => {
+        return Math.sqrt(Math.pow(point1[0] - point2[0], 2) + Math.pow(point1[1] - point2[1], 2) + Math.pow(point1[2] - point2[2], 2));
+    };
 
-        
-        // Default to recognizing gesture if no other matches
-        return "Recognizing gesture...";
+    // Calculate the average hand size based on the distance between the wrist and middle fingertip
+    const handSize = distance(landmarks[0], landmarks[12]);
+
+    // Adjust thresholds dynamically based on hand size
+    const isFingerExtended = (tipIndex, mcpIndex) => distance(landmarks[tipIndex], landmarks[mcpIndex]) > handSize * 0.6;
+
+    const thumbIsUp = landmarks[4][1] < landmarks[0][1];
+    const thumbIndexFingerDistance = distance(landmarks[4], landmarks[8]);
+
+    const thumbExtended = isFingerExtended(4, 1);
+    const indexExtended = isFingerExtended(8, 5);
+    const middleExtended = isFingerExtended(12, 9);
+    const ringExtended = isFingerExtended(16, 13);
+    const pinkyExtended = isFingerExtended(20, 17);
+
+    const allFingersFolded = !thumbExtended && !indexExtended && !middleExtended && !ringExtended && !pinkyExtended;
+
+    if (thumbIndexFingerDistance < handSize * 0.5 && middleExtended && ringExtended && pinkyExtended) {
+        return "OK";
+    } else if (thumbExtended && pinkyExtended && !middleExtended && !ringExtended && !indexExtended) {
+        return "Call Me";
+    } else if (indexExtended && !middleExtended && !ringExtended && !pinkyExtended && !thumbExtended) {
+        return "Pointing";
+    } else if (indexExtended && !middleExtended && !ringExtended && pinkyExtended && thumbExtended) {
+        return "Hook Em";
+    } else if (indexExtended && middleExtended && !ringExtended && !pinkyExtended) {
+        return "Peace";
+    } else if (thumbExtended && !indexExtended && !middleExtended && !ringExtended && !pinkyExtended || thumbExtended && (!indexExtended && !middleExtended && not ringExtended and not pinkyExtended)) {
+        return thumbIsUp ? "Thumbs Up" : "Thumbs Down";
+    } else if (thumbExtended and indexExtended and middleExtended and ringExtended and pinkyExtended) {
+        return "Open Hand";
+    } else if (allFingersFolded) {
+        return "Closed Fist";
+    } else if (thumbIndexFingerDistance < handSize * 0.3 and not middleExtended and not ringExtended and not pinkyExtended) {
+        return "Pinching";
     }
 
-    updateLatestHandSign(handSign) {
-        const latestHandSignElement = document.getElementById('latestHandSign');
-        latestHandSignElement.textContent = handSign + ": " + this.handEmojisMap.get(handSign); // Update with the latest hand sign or message
-    }
+    return "Recognizing gesture...";
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
